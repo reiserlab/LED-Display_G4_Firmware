@@ -29,7 +29,7 @@ You will need the following parts:
 
 Using the Pololu USB AVR software, configure the Pololu with the following parameters. Most notably, switch the regulator mode to 5V and set the VCC output to "Enabled".
 
-![Install MiniCore](assets/arduino_driver_install_minicore.png){:.ifr .pop}
+![Install MiniCore](assets/arduino_driver_install_minicore.png){:.ifr .pop .clear}
 
 In the Arduino IDE, you will need to install the MiniCore board package. To do this, go to the Board Manager (Tools → Board → Boards Manager) and search for "MiniCore". Install the latest version of the package.
 
