@@ -5,7 +5,7 @@ grand_parent: Generation 4
 nav_order: 1
 ---
 
-Software running on microcontroller units (MCUs) is considered firmware. This document guides you from obtaining the hardware to making the comm and driver panels work. Note that there are two different ways to upload the firmware: one for the [latest driver and comm board](#firmware-new) (driver v1.9 and comm >v0.4) and one for the older versions.
+Software running on microcontroller units (MCUs) is considered firmware. This document guides you from obtaining the hardware to making the comm and driver panels work. Note that there are two different ways to upload the firmware: one for the [latest driver and comm board](#firmware-new) (driver v1.9 and comm >v0.4) and one for the older versions. Only follow the instruction from one of the sections, mixing parts from "Older Firmware" and "Firmware" will not work.
 
 1. TOC
 {:toc}
