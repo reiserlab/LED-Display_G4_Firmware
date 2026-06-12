@@ -24,6 +24,8 @@ You will need the following parts:
 - [driver board shield]({{site.baseurl}}/Generation%204/Hardware/docs/programmer.html#driver)
 - [comm board shield]({{site.baseurl}}/Generation%204/Hardware/docs/programmer.html#comm)
 - [Arduino IDE](https://www.arduino.cc/en/software/)
+- [comm board firmware](https://github.com/reiserlab/LED-Display_G4_Firmware/tree/main/hardware_v0p2/comm)
+- [driver board firmware](https://github.com/reiserlab/LED-Display_G4_Firmware/tree/main/hardware_v0p2/driver)
 
 ![Set up Pololu USB AVR Programmer](assets/pololu_programmer_settings.png){:.ifr .pop}
 
@@ -31,13 +33,25 @@ Using the Pololu USB AVR software, configure the Pololu with the following param
 
 ![Install MiniCore](assets/arduino_driver_install_minicore.png){:.ifr .pop .clear}
 
-In the Arduino IDE, you will need to install the MiniCore board package. To do this, go to the Board Manager (Tools → Board → Boards Manager) and search for "MiniCore". Install the latest version of the package.
+In the Arduino IDE, you will need to install the MiniCore board package for the Pololu programmer. To do this, go to File → Preferences and add `https://files.pololu.com/arduino/package_pololu_index.json` to the "Additional Boards Manager URLs". Then go to the Board Manager (Tools → Board → Boards Manager) and search for "MiniCore". Alternatively, follow [MiniCore's own installation instructions](https://github.com/MCUdude/MiniCore#how-to-install). Install the latest version of the MiniCore package.
 
 ## Flashing firmware to the latest driver and comm board
 
-![Set serial](assets/arduino_driver_set_serial_port.png){:.ifr .pop}
+![Download the repository](assets/download-zip.png){:.ifr .pop}
 
-Connect either the driver or comm board via the matching shield to the Pololu USB AVR Programmer. For the driver shield, select the quadrant you want to program first via the dip switch on the programmer. Connect the Pololu USB AVR Programmer to your computer via USB. Select the COM port that is shown as "Programming port" in the Pololu USB AVR software or, if you don't have that software, select the COM port with the higher number, which is usually the programming port. Select all other options similar to what is shown in the screenshot, such as the Board (ATmega328), the Programmer (STK500 as ISP (MiniCore)), Variant (328P / 328PA), etc. Then click "Burn Bootloader" to flash the bootloader to the driver or comm board. You should see a success message in the Arduino IDE.
+Download the firmware: either [clone the Git repository](https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository) or download the repository as a zip file and unpack it into a directory. For hardware newer than v0.2, use the firmware in the `hardware_v0p2` folder: the comm board uses the firmware in the `comm` folder, and the driver uses the firmware in the `driver` folder. Then load either the `comm.ino` or the `driver.ino` in the Arduino IDE.
+
+![Connect Driver Board](assets/connect-driver.jpg){:.ifr .pop .clear}
+
+Connect either the driver or comm board via the matching shield to the Pololu USB AVR Programmer. The driver shield needs to align flush with the driver board.
+
+![Connect Comm Board](assets/connect-comm.jpg){:.ifr .pop .clear}
+
+The comm board and the comm board shield need to be in the same plane. Connect either of the shields to the programmer via the flat cable and connect the programmer to the computer.
+
+![Set serial](assets/arduino_driver_set_serial_port.png){:.ifr .pop .clear}
+
+For the driver shield, select the quadrant you want to program first via the dip switch on the programmer. Connect the Pololu USB AVR Programmer to your computer via USB. Select the COM port that is shown as "Programming port" in the Pololu USB AVR software or, if you don't have that software, select the COM port with the higher number, which is usually the programming port. Select all other options similar to what is shown in the screenshot, such as the Board (ATmega328), the Programmer (STK500 as ISP (MiniCore)), Variant (328P / 328PA), etc. Then click "Burn Bootloader" to flash the bootloader to the driver or comm board. You should see a success message in the Arduino IDE.
 
 ![Upload using programmer](assets/arduino_driver_upload_using_programmer.png){:.ifr .pop}
 
@@ -88,7 +102,7 @@ There is no verbose output that helps with debugging problems, but one of the fo
 
 # Programming an older comm panel {#comm-old}
 
-Each [comm board](../../Hardware/docs/comm.md) needs to be programmed.
+Each [comm board]({{site.baseurl}}/Generation%204/Hardware/docs/comm.html) needs to be programmed.
 
 The following has to be done only once for all comm boards: In the Arduino IDE, go to *Tools*{:.gui-txt} ­→ *Board*{:.gui-txt} and select *PanelG4*{:.gui-txt}. In *Tools*{:.gui-txt} ­→ *Programmer*{:.gui-txt}, you need to select *Arduino as ISP*{:.gui-txt} (not ArduinoISP).
 
@@ -160,6 +174,6 @@ Repeat the steps for "Flash driver board firmware" for the other three subdevice
 
 [^1]: Always remove the ribbon cable before removing and attaching a new driver subpanel, as attaching a panel without doing so will sometimes corrupt the ArduinoISP program on the Arduino Uno.
 
-[^2]: Note, you do not need an external power supply; the Arduino will provide power.
+[^2]: Note that you do not need an external power supply; the Arduino will provide power.
 
 [^3]: To fully program the driver, you need to program all four ATmega328s, which means programming the bootloader and firmware for all four dip switch "on" positions, one at a time.
