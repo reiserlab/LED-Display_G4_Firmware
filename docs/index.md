@@ -1,5 +1,5 @@
 ---
-title: Firmware
+title: Panels Firmware
 parent: Assembly
 grand_parent: Generation 4
 nav_order: 1
